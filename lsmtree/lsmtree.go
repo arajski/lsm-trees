@@ -15,18 +15,30 @@ type Tree struct {
     right *Tree
 }
 
-func Print(t *Tree) *Tree {
+func Print(t *Tree) {
+    if t.value == nil {
+        return
+    }
     if t.left != nil {
         Print(t.left)
-    }
-    if &t.value != nil {
-        fmt.Println(t.value.Key,":", t.value.Value)
     }
     if t.right != nil {
         Print(t.right)
     }
-
-    return t
+    fmt.Println(t.value.Key,":", t.value.Value)
+}
+func Size(t *Tree) int{
+  var size int = 0
+  if t.left != nil {
+    size += Size(t.left)
+  }
+  if t.right != nil {
+      size += Size(t.right)
+  }
+  if t.value != nil {
+      size += 1
+  }
+  return size 
 }
 
 func Push(t *Tree, r *Record) *Record {
